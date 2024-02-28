@@ -1,6 +1,7 @@
 import express from "express";
 import {
   addGrocery,
+  addInventeryItemsGrocery,
   deleteGrocery,
   getAllGrocery,
   getGrocery,
@@ -19,6 +20,12 @@ router.get("/get-grocery/:id", userAuthentication, getGrocery);
 router.post("/add-grocery", adminAuthentication, addGrocery);
 
 router.put("/update-grocery/:id", adminAuthentication, updateGrocery);
+
+router.patch(
+  "/grocery-inventory/:id",
+  adminAuthentication,
+  addInventeryItemsGrocery
+);
 
 router.delete("/delete-grocery/:id", adminAuthentication, deleteGrocery);
 

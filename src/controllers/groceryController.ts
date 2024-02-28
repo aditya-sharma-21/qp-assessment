@@ -52,6 +52,21 @@ export const updateGrocery = async (req, res, next) => {
   }
 };
 
+export const addInventeryItemsGrocery = async (req, res, next) => {
+  try {
+    const { quantity } = req.body;
+
+    const grocery: any = await Grocery.findByPk(req.params.id);
+
+    grocery.quantity = grocery.quantity + quantity;
+    grocery.save();
+
+    return res.send(grocery);
+  } catch (error) {
+    return res.send({ message: error.message });
+  }
+};
+
 export const deleteGrocery = async (req, res, next) => {
   try {
     await Grocery.destroy({
