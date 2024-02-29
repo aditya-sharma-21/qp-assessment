@@ -1,5 +1,8 @@
 import express from "express";
 import bodyParser from "body-parser";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 import { database } from "./config/database.js";
 
@@ -23,7 +26,7 @@ app.use("/", (req, res, next) => {
   return res.send("Hello World");
 });
 
-app.listen(3000, async () => {
+app.listen(process.env.PORT, async () => {
   try {
     await database.authenticate();
     await User.sync();

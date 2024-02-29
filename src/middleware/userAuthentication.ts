@@ -13,7 +13,7 @@ export const userAuthentication = async (req, res, next) => {
 
     const verified: VerifiedToken = (await jwt.verify(
       token,
-      "testing"
+      process.env.SECRET_TOKEN
     )) as VerifiedToken;
     const user = await User.findOne({
       where: {

@@ -17,7 +17,7 @@ export const registerUser = async (req, res, next) => {
       type,
     });
 
-    const token = jwt.sign({ username, email, type }, "testing");
+    const token = jwt.sign({ username, email, type }, process.env.SECRET_TOKEN);
 
     return res.send({ user, token });
   } catch (error) {
@@ -47,7 +47,7 @@ export const userLogin = async (req, res, next) => {
 
     const token = jwt.sign(
       { id: user.username, email: user.email, type: user.type },
-      "testing"
+      process.env.SECRET_TOKEN
     );
     res.send({ user, token });
   } catch (error) {
