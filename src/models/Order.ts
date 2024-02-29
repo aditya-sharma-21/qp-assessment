@@ -97,14 +97,6 @@ const OrderItem = database.define<IOrderItemsInstance>("order_item", {
   },
 });
 
-Order.sync().then(() => {
-  console.log("Order table created");
-});
-
-OrderItem.sync().then(() => {
-  console.log("Order Item table created");
-});
-
 User.hasMany(Order, { foreignKey: "user_id" });
 Order.belongsTo(User, { foreignKey: "user_id" });
 

@@ -6,6 +6,9 @@ import { database } from "./config/database.js";
 import userRouter from "./routers/users.js";
 import groceryRouter from "./routers/groceries.js";
 import orderRouter from "./routers/orders.js";
+import { User } from "./models/User.js";
+import { Grocery } from "./models/Grocery.js";
+import { Order, OrderItem } from "./models/Order.js";
 
 const app = express();
 
@@ -23,6 +26,10 @@ app.use("/", (req, res, next) => {
 app.listen(3000, async () => {
   try {
     await database.authenticate();
+    await User.sync();
+    await Grocery.sync();
+    await Order.sync();
+    await OrderItem.sync();
     console.log("Database Connected successfully!");
     console.log("App is runnig on port :- 3000");
   } catch (error) {

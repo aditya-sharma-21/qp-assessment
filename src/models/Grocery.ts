@@ -44,8 +44,4 @@ const Grocery = database.define<IGroceryInstance>(
   }
 );
 
-Grocery.sync().then(() => {
-  console.log("Grocery table created");
-});
-
 export { Grocery };

@@ -46,8 +46,4 @@ const User = database.define<IUsersInstance>(
   }
 );
 
-User.sync().then(() => {
-  console.log("User table created");
-});
-
 export { User };
