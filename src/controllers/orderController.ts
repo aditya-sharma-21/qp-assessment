@@ -1,12 +1,12 @@
-import { Grocery } from "../models/Grocery.js";
-import { Order, OrderItem } from "../models/Order.js";
+import { Grocery, IGroceryInstance } from "../models/Grocery.js";
+import { IOrdersInstance, Order, OrderItem } from "../models/Order.js";
 import { v4 as uuid } from "uuid";
 
 export const createOrder = async (req, res, next) => {
   try {
     const { groceries } = req.body;
 
-    const order: any = await Order.create({
+    const order: IOrdersInstance = await Order.create({
       user_order_id: uuid(),
       user_id: req.user.id,
       total_amount: 0,
@@ -17,7 +17,7 @@ export const createOrder = async (req, res, next) => {
     for (let item of groceries) {
       const { id, quantity } = item;
 
-      const grocery: any = await Grocery.findByPk(id);
+      const grocery: IGroceryInstance = await Grocery.findByPk(id);
 
       if (!grocery || grocery.quantity == 0) {
         return res

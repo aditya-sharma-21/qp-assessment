@@ -1,9 +1,27 @@
-import { DataTypes } from "sequelize";
+import { DataTypes, Model } from "sequelize";
 import { database } from "../config/database.js";
 
-const User = database.define(
+export interface IUsersAttributes {
+  id: number;
+  username: number;
+  email: number;
+  password: string;
+  type: string;
+}
+
+export interface IUsersInstance
+  extends Model<IUsersAttributes>,
+    IUsersAttributes {}
+
+const User = database.define<IUsersInstance>(
   "user",
   {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+      allowNull: false,
+    },
     username: {
       type: DataTypes.STRING,
       unique: true,

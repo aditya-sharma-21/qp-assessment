@@ -1,4 +1,4 @@
-import { Grocery } from "../models/Grocery.js";
+import { Grocery, IGroceryInstance } from "../models/Grocery.js";
 
 export const getAllGrocery = async (req, res, next) => {
   try {
@@ -56,7 +56,7 @@ export const addInventeryItemsGrocery = async (req, res, next) => {
   try {
     const { quantity } = req.body;
 
-    const grocery: any = await Grocery.findByPk(req.params.id);
+    const grocery: IGroceryInstance = await Grocery.findByPk(req.params.id);
 
     grocery.quantity = grocery.quantity + quantity;
     grocery.save();

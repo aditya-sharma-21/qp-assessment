@@ -1,11 +1,39 @@
-import { DataTypes } from "sequelize";
+import { DataTypes, Model } from "sequelize";
 import { database } from "../config/database.js";
 import { Grocery } from "./Grocery.js";
 import { User } from "./User.js";
 
-const Order = database.define(
+export interface IOrdersAttributes {
+  id: number;
+  user_order_id: string;
+  user_id: number;
+  total_amount: number;
+}
+
+export interface IOrderItemsAttributes {
+  id: number;
+  order_id: number;
+  grocery_id: number;
+  quantity: number;
+}
+
+export interface IOrdersInstance
+  extends Model<IOrdersAttributes>,
+    IOrdersAttributes {}
+
+export interface IOrderItemsInstance
+  extends Model<IOrderItemsAttributes>,
+    IOrderItemsAttributes {}
+
+const Order = database.define<IOrdersInstance>(
   "order",
   {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+      allowNull: false,
+    },
     user_order_id: {
       type: DataTypes.UUID,
       allowNull: false,
@@ -32,7 +60,13 @@ const Order = database.define(
   }
 );
 
-const OrderItem = database.define("order_item", {
+const OrderItem = database.define<IOrderItemsInstance>("order_item", {
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+    allowNull: false,
+  },
   order_id: {
     type: DataTypes.INTEGER,
     references: {

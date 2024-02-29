@@ -1,4 +1,4 @@
-import { User } from "../models/User.js";
+import { IUsersInstance, User } from "../models/User.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { Op } from "sequelize";
@@ -28,7 +28,7 @@ export const registerUser = async (req, res, next) => {
 export const userLogin = async (req, res, next) => {
   try {
     const { login, password } = req.body;
-    const user: any = await User.findOne({
+    const user: IUsersInstance = await User.findOne({
       //todo
       where: {
         [Op.or]: [
