@@ -19,8 +19,7 @@ export const registerUser = async (req, res, next) => {
 
     const token = jwt.sign({ username, email, type }, "testing");
 
-    res.send({ user, token });
-    return res.send(user);
+    return res.send({ user, token });
   } catch (error) {
     return res.send(error);
   }
